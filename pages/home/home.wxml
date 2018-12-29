@@ -1,2 +1,30 @@
-<!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<import src="../tpls/product/product.wxml"/>
+<view class='container'>
+   <!-- <swiper class='swiper' autoplay='true'indicator-dots='true'>
+      <block wx:for="{{bannerArr}}" wx:key="">
+        <swiper-item class="banner-item">
+          <image class='img' src='{{item.related_image.url}}'>
+          </image>
+        </swiper-item>
+      </block>
+   </swiper> -->
+   <view class='home-main'>
+      <view class='home-main-theme'>
+    <view class='home-main-header'>精选商品</view>
+    <view class='theme-box'>
+       <block wx:for="{{themeArr}}" wx:key="key">
+          <view wx:if='{{index==2}}' class='theme-item-big' data-id="{{item.id}}"  data-name="{{item.name}}" bindtap='onThemeItemTap'>
+          <image src='{{item.related_head_img.url}}'></image>
+          </view>
+          <view wx:else class='theme-item' data-id="{{item.id}}" data-name="{{item.name}}" bindtap='onThemeItemTap' >
+          <image src='{{item.related_head_img.url}}'></image>
+          </view>
+        
+        </block>
+    </view>
+  </view>
+
+
+   </view>
+
+</view>

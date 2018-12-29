@@ -1,6 +1,6 @@
-// pages/home/home.js
+import { Home } from "home_model.js";
+var home = new Home();
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -12,7 +12,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that=this;
+     var id=1;
+     var ids="1,2,3";
+     var count =15;
+    home.getBannerItems(id,(res)=>{
+      console.log(res);
+      this.setData({
+        'bannerArr': res
+      });
+    });
+    home.getThemes(ids,(res)=>{
+      console.log(res);
+      this.setData({
+        'themeArr':res
+      });
+    });
+    home.getRecentProducts(count,(res)=>{
+      console.log(res);
+      this.setData({
+        'recentProductsArr': res
+      });
+    });
+    
   },
 
   /**
