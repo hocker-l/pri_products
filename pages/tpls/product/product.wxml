@@ -1,0 +1,13 @@
+<template name="product">
+  <view class='products-box'>
+      <block  wx:for="{{recentProducts}}"  wx:key="key">
+          <view class='products-item'  data-id="{{item.id}}" >
+              <image class='products-image' src='{{item.related_image.url}}' mode="aspectFill"></image>
+              <view class='products-item-bottom'>
+                  <text class='name'>{{item.name}}</text>
+                  <view class='price'>￥{{item.price}} </view>
+              </view>
+          </view>
+      </block>
+  </view>
+</template>
