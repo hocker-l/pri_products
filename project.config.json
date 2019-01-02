@@ -28,13 +28,36 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 2,
+			"list": [
+				{
+					"id": -1,
+					"name": "分类页面",
+					"pathName": "pages/category/category",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "商品详情页面",
+					"pathName": "pages/product/product",
+					"query": "id=2"
+				},
+				{
+					"id": -1,
+					"name": "商品主题页面",
+					"pathName": "pages/theme/theme",
+					"query": "id=2"
+				}
+			]
 		}
 	}
 }

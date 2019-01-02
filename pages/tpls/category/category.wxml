@@ -1,0 +1,21 @@
+<template name="categorydetail">
+    <view class='category-detail-box'>
+        <view class='category-header'>
+            <image src='{{categoryInfo.topic_img}}'></image>
+        </view>
+        <view class='category-title'>
+            <text>{{categoryInfo.toppic_name}}</text>
+        </view>
+        <view class='category-main'>
+            <block wx:for="{{categoryInfo.data}}" wx:key="key">
+                <view class='category-goods-items {{index%3==1?middle:""}}' data-id="{{item.id}}">
+                    <image src='{{item.related_image.url}}' mode="aspectFill"></image>
+                    <view>{{item.name}}</view>
+                </view>
+            </block>
+        </view>
+
+    </view>
+</template>
+
+

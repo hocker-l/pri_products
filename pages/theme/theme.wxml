@@ -1,0 +1,10 @@
+<import src="../tpls/product/product.wxml"/>
+<view class='container'>
+  <view class='theme-header'>
+  <image src='{{productArr.related_head_img.url}}' mode='aspectFill'></image>
+  </view>
+  <view class='theme-main'>
+  <template is="product" data="{{recentProducts:productArr.related_ex_product}}">
+  </template>
+  </view>
+</view>
