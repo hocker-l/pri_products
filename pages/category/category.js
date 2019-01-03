@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    transClassArr: ['tanslate0', 'tanslate1', 'tanslate2', 'tanslate3', 'tanslate4', 'tanslate5'],
+    currentMenuIndex:0
   },
 
   /**
@@ -14,7 +15,7 @@ Page({
    */
   onLoad: function (options) {
     category.getCategory((allCategoryData)=>{
-      console.log(allCategoryData);
+      console.log(allCategoryData.length);
       this.setData({
         "allCategoryArr":allCategoryData
       });
@@ -27,14 +28,50 @@ Page({
             };
             console.log(objectArr);
         this.setData({
-          "categoryInfo": objectArr
+          "categoryInfo0": objectArr
         });
       });
 
     });
-    
   },
-
+  changeCategory:function(event){
+    var id = event.currentTarget.dataset.id;
+    var index = event.currentTarget.dataset.index;
+    this.setData({
+      currentMenuIndex:index
+    });
+    if(this.isLoadedData(index)){
+      console.log(id);
+      category.getProductByCategory(id,(resData)=>{
+        this.setData(
+          this.getDataObjForBind(index,resData)
+        );
+      })
+    }
+  },
+  isLoadedData(index){
+    if (this.data["categoryInfo"+index]){
+      return false;
+    }else{
+      return true;
+    }
+  },
+  getDataObjForBind:function(index,data){
+    var obj ={};
+    var baseData = this.data.allCategoryArr[index];
+    obj["categoryInfo" + index] ={
+      topic_img: baseData.related_topic_img.url,
+      toppic_name: baseData.name,
+      data: data
+    };
+    return obj;
+  },
+  onProductItemTap: function (event) {
+    var id = event.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../product/product?id=' + id,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -6,24 +6,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-     id:2,
+     id:null,
+     productCounts:1,
+     countsArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    currentTabsIndex: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.data.id =oprions.id;
+    this.data.id = options.id;
     this._loadData();
 
   },
   _loadData(){
-    product.getProductById(1, (res) => {
-      console.log("34345")
-      console.log(res);
+    product.getProductById(this.data.id, (res) => {
+      console.log(res[0])
+      this.setData({
+        product: res[0]
+      });
     })
   },
-
+  bindPickerChange:function(e){
+    console.log(e.detail.value);
+    this.setData({
+      productCounts: this.data.countsArray[e.detail.value]
+    });
+  },
+  onTabsItemTap:function(e){
+    console.log(e);
+    var index = e.currentTarget.dataset.index;
+    this.setData({
+      currentTabsIndex: index
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
