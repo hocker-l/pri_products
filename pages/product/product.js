@@ -1,5 +1,7 @@
 import { Product } from "product_model.js";
+import { Cart } from "../cart/cart_model.js";
 var product = new Product();
+var cart = new Cart();
 Page({
 
   /**
@@ -9,7 +11,7 @@ Page({
      id:null,
      productCounts:1,
      countsArray: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    currentTabsIndex: 0,
+     currentTabsIndex: 0,
   },
 
   /**
@@ -24,6 +26,7 @@ Page({
     product.getProductById(this.data.id, (res) => {
       console.log(res[0])
       this.setData({
+        cartTotalCounts:cart.getCartTotalCounts(),
         product: res[0]
       });
     })
@@ -41,11 +44,24 @@ Page({
       currentTabsIndex: index
     })
   },
+  onAddingToCartTap:function(e){
+    this.addToCart();
+  },
+  addToCart:function(){
+    var tempObj ={};
+    var keys = ["id", "name", "price","related_image"];
+    for(var key in this.data.product){
+      if(keys.indexOf(key)>=0){
+        tempObj[key] = this.data.product[key];
+      }
+    }
+    cart.add(tempObj, this.data.productCounts);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
