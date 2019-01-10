@@ -76,20 +76,49 @@ add(item,counts){
    */
   getCartTotalCounts(flag){
     var data =this.getCartDataFromLocal();
-    var counts =0;
+    var counts1 =0;
+  	var counts2 =0;
     for(let i=0;i<data.length;i++){
       if(flag){
         if(data[i].selectedStatus){
-          counts +=data[i].counts;
+          counts1 +=data[i].counts;
+		  counts2 ++;
         }
       } else {
-        counts += data[i].counts;
+        counts1 += data[i].counts;
+		counts2 ++;
       }
     }
-    return counts;
+    return {
+		counts1:counts1,
+		counts2:counts2
+	}
   }
 
-
+  addCount(id,count){
+    this.__changeCounts(id,count);
+  }
+  cutCount(id, count){
+    this.__changeCounts(id, count);
+  }
+  __changeCounts(id,count){
+    var carData =this.getCartDataFromLocal();
+    var info =this._isHasThatOne(id,carData);
+    if(info.index!=-1){
+      if(count>0){
+          carData[info.index].counts += count;
+      }else{
+        if (carData[info.index].counts > 1) {
+          carData[info.index].counts += count;
+        }
+      }
+    }
+    wx.setStorageSync(this._storageKeyName,carData)
+  }
+  //统一把数据保存到缓存中
+  execSetStorageSync(data){
+    wx.setStorageSync(this._storageKeyName, data);
+  }
 
 }
  

@@ -26,7 +26,7 @@ Page({
     product.getProductById(this.data.id, (res) => {
       console.log(res[0])
       this.setData({
-        cartTotalCounts:cart.getCartTotalCounts(),
+        cartTotalCounts: cart.getCartTotalCounts().counts1,
         product: res[0]
       });
     })
@@ -46,6 +46,9 @@ Page({
   },
   onAddingToCartTap:function(e){
     this.addToCart();
+    this.setData({
+      cartTotalCounts: cart.getCartTotalCounts().counts1
+    });
   },
   addToCart:function(){
     var tempObj ={};
@@ -56,6 +59,12 @@ Page({
       }
     }
     cart.add(tempObj, this.data.productCounts);
+  },
+  onCartTap(event){
+    var id = event.currentTarget.dataset.id;
+    wx.switchTab({
+      url: "../cart/cart",
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
