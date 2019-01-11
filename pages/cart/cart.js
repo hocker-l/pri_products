@@ -97,7 +97,7 @@ Page({
       cart.addCount(id,count);
     }else if(type == 'cut'){
       count=-1;
-      cart.cutCount(id,-1);
+      cart.cutCount(id, count);
     }
     this.data.cartData[index].counts +=count;
     this._resetCartData();

@@ -82,11 +82,11 @@ add(item,counts){
       if(flag){
         if(data[i].selectedStatus){
           counts1 +=data[i].counts;
-		  counts2 ++;
+		      counts2 ++;
         }
       } else {
         counts1 += data[i].counts;
-		counts2 ++;
+		    counts2 ++;
       }
     }
     return {
