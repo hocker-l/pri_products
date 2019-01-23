@@ -18,8 +18,8 @@ getCartDataFromLocal(flag){
   //在下单时过滤不下单的商品
   if(flag){
     var newRes = [];
-    for (let i;i<res.length;i++){
-      if(res[i].res.selectedStatus){
+    for (let i=0;i<res.length;i++){
+      if (res[i].selectedStatus){
         newRes.push(res[i]);
       }
     }

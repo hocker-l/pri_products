@@ -108,5 +108,18 @@ Page({
     var index =this._getProductIndexById(id);
     this.data.cartData.splice(index,1);
     this._resetCartData();
+  },
+  submitOrder(){
+    wx.navigateTo({
+      url: '../order/order?account='+this.data.account+"&from=cart",
+    });
+  },
+  onProductsItemTap(event){
+    var id = event.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../product/product?id='+id,
+    })
+
   }
+
 })
