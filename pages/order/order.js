@@ -26,7 +26,10 @@ Page({
         productsArr: productArr,
         account:this.data.account,
         orderStatus:0
-      });  
+      }); 
+    address.getAddress((res)=>{
+      this._bindAddressInfo(res);
+    })
   },
   editAddress:function(options){
     var that = this;

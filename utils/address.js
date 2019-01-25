@@ -13,7 +13,7 @@ class Address extends Base{
    */
   setAddressInfo(res){
     var province =res.provinceName || res.province,
-        city = res.cityName || city,
+        city = res.cityName || res.city,
         country =res.countryName || res.country,
         detail =res.detailInfo || res.detail;
     var totalDetail =city +country + detail;  
@@ -48,7 +48,20 @@ class Address extends Base{
     }
     return formData;
   }
-
+  /*获得我自己的收货地址*/
+  getAddress(callback){
+    var that =this;
+    var param ={
+      url:"getAddress",
+      sCallback:function(res){
+        if(res){
+          res.totalDetail =that.setAddressInfo(res);
+          callback && callback(res);
+        }
+      }
+    };
+    that.request(param);
+  }
 
 }
 export { Address };
