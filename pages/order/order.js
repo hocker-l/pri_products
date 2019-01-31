@@ -78,6 +78,48 @@ Page({
       }
     });
   },
+  pay:function(){
+    if(!this.data.addressInfo){
+      this.showTips('下单提示', '请填写您的收货地址');
+      return;
+    }
+    if(this.data.orderStatus ==0){
+      this._firstTimePay();
+    }else{
+
+    }
+  },
+  _firstTimePay:function(){
+    var orderInfo=[],
+      productInfo = this.data.productsArr,
+        order =new Order();
+    for (let i = 0; i < productInfo.length; i++) {
+      orderInfo.push({
+        product_id:productInfo[i].id,
+        count:productInfo[i].counts
+      });
+    }
+
+    var that = this;
+    //支付分两步，第一步是生成订单号，然后根据订单号支付
+    order.doOrder(orderInfo, (data) => {
+      //订单生成成功
+      if (data.pass) {
+        //更新订单状态
+        console.log(data);
+        var id = data.order_id;
+        that.data.id = id;
+        that.data.fromCartFlag = false;
+
+        //开始支付
+        order.execPay(id,(data)=>{
+          console.log(data);
+        });
+      } else {
+        // that._orderFail(data);  // 下单失败
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
